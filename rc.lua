@@ -91,14 +91,6 @@ local layouts = {
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.floating
  }
---local layouts = {
-    --awful.layout.suit.max,
-    --lain.layout.uselesstile.left,
-    --lain.layout.uselesstile.top,
-    --awful.layout.suit.fair,
-    --awful.layout.suit.fair.horizontal
---}
--- }}}
 
 --- Monitor setup
 if screen.count() == 1 then
