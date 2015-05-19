@@ -5,6 +5,8 @@
                                 
 --]]
 
+local awful     = require("awful")
+
 theme                               = {}
 
 theme.icon_dir                      = os.getenv("HOME") .. "/.config/awesome/themes/holo/icons"
@@ -13,8 +15,9 @@ theme.wallpaper                     = os.getenv("HOME") .. "/.config/awesome/the
 
 theme.topbar_path                   = "png:" .. theme.icon_dir .. "/topbar/"
 
-theme.font                          = "Tamsyn 10.5"
-theme.taglist_font                  = "Tamsyn 8"
+HOST  = awful.util.pread("hostname | tr -d '\n'")
+theme.font                          = "DejaVu Sans 10.5"
+theme.taglist_font                  = "DejaVu Sans 9"
 theme.fg_normal                     = "#FFFFFF"
 theme.fg_focus                      = "#0099CC"
 theme.bg_normal                     = "#242424"
@@ -33,6 +36,11 @@ theme.awful_widget_height           = 14
 theme.awful_widget_margin_top       = 2
 theme.menu_height                   = "20"
 theme.menu_width                    = "400"
+
+if HOST == "thinkpad" then
+    theme.font                          = "DejaVu Sans 14.5"
+    theme.taglist_font                  = "DejaVu Sans 12"
+end
 
 theme.widget_bg                     = theme.icon_dir .. "/bg_focus_noline.png"
 theme.awesome_icon                  = theme.icon_dir .. "/awesome_icon.png"
