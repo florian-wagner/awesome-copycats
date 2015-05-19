@@ -133,6 +133,11 @@ if beautiful.wallpaper then
 end
 -- }}}
 
+-- {{{ Menu
+mymainmenu = awful.menu.new({ items = require("menugen").build_menu(),
+                              theme = { height = 16, width = 130 }})
+mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+                                     menu = mymainmenu })
 -- {{{ Wibox
 markup = lain.util.markup
 blue   = "#80CCE6"
