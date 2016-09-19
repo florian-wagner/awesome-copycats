@@ -1,8 +1,8 @@
 --[[
-                                
-     Holo Awesome WM config 2.0 
-     github.com/copycat-killer  
-                                
+
+     Holo Awesome WM config 2.0
+     github.com/copycat-killer
+
 --]]
 
 local awful     = require("awful")
@@ -91,7 +91,7 @@ theme.tasklist_maximized_horizontal = ""
 theme.tasklist_maximized_vertical   = ""
 
 -- lain related
-theme.useless_gap_width             = 10
+theme.useless_gap_width             = 5
 theme.layout_uselesstile            = theme.icon_dir .. "/uselesstile.png"
 theme.layout_uselesstileleft        = theme.icon_dir .. "/uselesstileleft.png"
 theme.layout_uselesstiletop         = theme.icon_dir .. "/uselesstiletop.png"

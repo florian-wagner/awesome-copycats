@@ -18,7 +18,10 @@ local beautiful = require("beautiful")
 local naughty   = require("naughty")
 local drop      = require("scratchdrop")
 local lain      = require("lain")
+local pomodoro      = require("pomodoro")
+pomodoro.init()
 -- }}}
+
 
 -- {{{ Error handling
 if awesome.startup_errors then
@@ -53,6 +56,7 @@ end
 
 run_once("unclutter")
 run_once("compton")
+run_once("xrandr --output VGA-1 --off --output DVI-I-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal")
 
 -- }}}
 
@@ -75,20 +79,19 @@ editor_cmd = terminal .. " -e " .. editor
 -- user defined
 browser    = "chromium"
 browser2   = browser
-mail       = "thunderbird"
-gui_editor = "gvim"
+mail       = "icedove"
+gui_editor = "atom"
 graphics   = "gimp"
 musiplr    = terminal .. " -e ncmpcpp "
 todo = "chromium --app-id=ojcflmmmcfpacggndoaaflkmcoblhnbh"
 
 local layouts = {
-    --awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
+    lain.layout.uselesstile.left,
+    lain.layout.uselesstile.right,
+    lain.layout.uselesstile.top,
+    lain.layout.uselessfair,
+    lain.layout.uselessfair.horizontal,
+    lain.layout.termfair,
     awful.layout.suit.floating
  }
 
@@ -96,7 +99,7 @@ local layouts = {
 if screen.count() == 1 then
     tags = {
         names = { " 1: MAIL ", " 2: WEB ", " 3: FILES ", " 4: TERM ", " 5: TEXT ", " 6: TODO ", " 7: MISC ", " 8: VBOX "},
-        layout = { layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[6] },
+        layout = { layouts[1], layouts[1], layouts[1], layouts[6], layouts[1], layouts[1], layouts[1], layouts[1] },
     }
     -- {{{ Tags
     for s = 1, screen.count() do
@@ -106,7 +109,7 @@ if screen.count() == 1 then
 elseif screen.count() == 2 then
     tags = {
         { names = { " 1: MAIL ", " 2: WEB ", " 3: FILES ", " 4: TERM ", " 5: TEXT ", " 6: TODO ", " 7: MISC "}, layout = { layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1]} },
-        { names = { " 1 ", " 2 ", " 3 ", " 4 ", " 5 "}, layout = { layouts[1], layouts[1], layouts[1], layouts[1], layouts[1] } },
+        { names = { " 1: CODING ", " 2 ", " 3 ", " 4 ", " 5 "}, layout = { layouts[1], layouts[1], layouts[1], layouts[1], layouts[1] } },
     }
     -- {{{ Tags
     for s = 1, screen.count() do
@@ -425,6 +428,10 @@ for s = 1, screen.count() do
         right_layout:add(cpuwidget)
         right_layout:add(bottom_bar)
     end
+    if s == 2 then
+        right_layout:add(pomodoro.widget)
+        right_layout:add(pomodoro.icon_widget)
+    end
     right_layout:add(calendar_icon)
     right_layout:add(calendarwidget)
     right_layout:add(bottom_bar)
@@ -574,8 +581,8 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey, "Shift" }, "r",      awesome.restart),
-    awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
+    --awful.key({ modkey, "Shift" }, "r",      awesome.restart),
+    --awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
 
     -- Dropdown terminal
     awful.key({ modkey,	          }, "z",      function () drop(terminal) end),
@@ -616,8 +623,9 @@ globalkeys = awful.util.table.join(
         awful.util.spawn("xbacklight -inc 15") end),
 
     -- Shutdown dialog
-    awful.key({ "Control", altkey }, "Delete", function ()
-        awful.util.spawn("sh /home/fwagner/Skripte/bash/shutdown_dialog.sh") end),
+    awful.key({ "Control", altkey }, "Delete", awesome.quit),
+
+        --awful.util.spawn("sh /home/fwagner/Skripte/bash/shutdown_dialog.sh") end),
 
     -- Copy to clipboard
     awful.key({ modkey }, "c", function () os.execute("xsel -p -o | xsel -i -b") end),
@@ -757,10 +765,13 @@ awful.rules.rules = {
     { rule = { class = "MPlayer" },
           properties = { floating = true } },
 
-    { rule = { class = "Thunderbird" },
+    { rule = { class = "Icedove" },
           properties = { tag = tags[1][1], maximized_horizontal = true, maximized_vertical = true } },
 
-    { rule = { class = "Chromium" },
+    { rule = { class = "Atom" },
+          properties = { tag = tags[2][1], maximized_horizontal = true, maximized_vertical = true } },
+
+    { rule = { class = "Chromium-browser" },
           properties = { tag = tags[1][2], maximized_horizontal = true, maximized_vertical = true } },
 
     { rule = { instance = "crx_ojcflmmmcfpacggndoaaflkmcoblhnbh" }, -- Wunderlist app
@@ -838,15 +849,20 @@ awful.util.spawn_with_shell("xscreensaver -no-splash")
 awful.screen.focus(1)
 
 -- Custom autostart
-run_once("pacman -Qqne > .pacman-packages." .. HOST)
-run_once("numlockx on")
 run_once("nm-applet")
-run_once("conky -c .conkyrc." .. HOST)
+-- run_once("conky -c .conkyrc." .. HOST)
+run_once("pidgin")
+
 run_once(todo)
-run_once("redshift -l 52.5:13.4 -t 5800:4500")
+run_once("redshift -l 50.73743:7.09821 -t 5800:4500")
 run_once("skype")
 run_once(mail)
 run_once("synapse -s")
+run_once("skypeforlinux")
 run_once("sleep 10 && chromium && dropbox")
-run_once("amixer set 'Beep' 0% mute")
-run_once("cd ~/Downloads && rm -rf *\\(1\\)*")
+run_once("atom")
+run_once("owncloud")
+run_once("xset b off")
+run_once("numlockx on")
+run_once("synapse -s")
+run_once("setxkbmap -option caps:escape")
