@@ -2,12 +2,12 @@
 Awesome WM Copycats
 ===================
 
---------------------------------
-Power themes for Awesome WM 3.5+
---------------------------------
+--------------------------
+Themes for Awesome WM 3.5+
+--------------------------
 
 :Author: Luke Bonham <dada [at] archlinux [dot] info>
-:Version: 2.0-git
+:Version: git
 :License: BY-NC-SA_
 :Source: https://github.com/copycat-killer/awesome-copycats
 
@@ -26,7 +26,7 @@ Notable features
 - Quake drop-down terminal
 - Calendar with current day highlighted and months switch with a click
 - Elegant notifications for new mails, current song, volume level, hdd critical state, low battery
-- Yahoo! Weather integration
+- OpenWeatherMap integration
 - Net carrier status notifier
 - Colorful autoupdating icons
 - Symbolic tag names
@@ -82,9 +82,8 @@ Installation
 
 Using git you can have the full master branch: ::
 
+    cd ~/.config/awesome
     git clone --recursive https://github.com/copycat-killer/awesome-copycats.git
-
-then, move the contents of `awesome-copycats` to `~/.config/awesome`.
 
 Otherwise, download the latest two masters of ``awesome-copycats`` and ``lain`` (1_ and 2_), extract the first one, extract the second one into the first one, and put the contents of the first one into your Awesome directory.
 
@@ -103,7 +102,7 @@ Then customize your ``rc.lua`` and restart Awesome (``Mod4 + ctrl + r``).
 Notes
 =====
 
-Be sure to have the latest **stable** versions of Lua and Awesome.
+Only compatible with **stable** versions of Lua and Awesome (git/unstable versions are *not* supported).
 
 Complements are provided by lain_: be sure to meet its dependencies_.
 
@@ -115,8 +114,8 @@ Blackburn and Dremora use Icons_: be sure to have bitmaps enabled if running und
 
 Feel free to email me if you have any request.
 
-.. _BY-NC-SA: http://creativecommons.org/licenses/by-nc-sa/3.0/
-.. _Awesome: http://awesome.naquadah.org/
+.. _BY-NC-SA: http://creativecommons.org/licenses/by-nc-sa/4.0/
+.. _Awesome: http://github.com/awesomeWM/awesome  
 .. _tip: https://bbs.archlinux.org/profile.php?id=51327
 .. _romockee: https://github.com/romockee/powerarrow
 .. _ok100: http://ok100.deviantart.com/art/DWM-January-2013-348656846

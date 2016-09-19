@@ -1,3 +1,4 @@
+
 --[[
                                              
      Powerarrow Darker Awesome WM config 2.0 
@@ -53,10 +54,6 @@ theme.layout_max                    = themes_dir .. "/icons/max.png"
 theme.layout_fullscreen             = themes_dir .. "/icons/fullscreen.png"
 theme.layout_magnifier              = themes_dir .. "/icons/magnifier.png"
 theme.layout_floating               = themes_dir .. "/icons/floating.png"
-
-theme.arrl                          = themes_dir .. "/icons/arrl.png"
-theme.arrl_dl                       = themes_dir .. "/icons/arrl_dl.png"
-theme.arrl_ld                       = themes_dir .. "/icons/arrl_ld.png"
 
 theme.widget_ac                     = themes_dir .. "/icons/ac.png"
 theme.widget_battery                = themes_dir .. "/icons/battery.png"

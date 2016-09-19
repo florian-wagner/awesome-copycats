@@ -7,7 +7,7 @@
 ----------------------------------------------------------------
 -- To use this module add:
 --   require("eminent")
--- to the top of your rc.lua. 
+-- to the top of your rc.lua.
 --
 -- That's it. Through magical monkey-patching, all you need to
 -- do to start dynamic tagging is loading it.
@@ -18,13 +18,9 @@
 
 -- Grab environment
 local ipairs = ipairs
-local pairs = pairs
-local awful = require("awful")
-local table = table
-local capi = {
-    tag = tag,
-    mouse = mouse,
-    client = client,
+local awful  = require("awful")
+local table  = table
+local capi   = {
     screen = screen,
     wibox = wibox,
     timer = timer,
@@ -44,20 +40,15 @@ eminent.create_new_tag = true
 -- Grab the original functions we're replacing
 local deflayout = nil
 local orig = {
-    new = awful.tag.new,
-    viewidx = awful.tag.viewidx,
-
+    new     = awful.tag.new,
     taglist = awful.widget.taglist.new,
-    --label = awful.widget.taglist.label.all,
-    label = awful.widget.taglist.filter.all,
+    filter  = awful.widget.taglist.filter.all,
 }
 
 -- Return tags with stuff on them, mark others hidden
 function gettags(screen)
     local tags = {}
-
-    --for k, t in ipairs(capi.screen[screen]:tags()) do
-    for k, t in ipairs(awful.tag.gettags(screen)) do
+    for k, t in ipairs(capi.screen[screen]:tags()) do
         if t.selected or #t:clients() > 0 then
             awful.tag.setproperty(t, "hide", false)
             table.insert(tags, t)
