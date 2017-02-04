@@ -20,12 +20,7 @@
 local ipairs = ipairs
 local awful  = require("awful")
 local table  = table
-local capi   = {
-    screen = screen,
-    wibox = wibox,
-    timer = timer,
-    keygrabber = keygrabber,
-}
+local capi   = { screen = screen }
 
 local getscreen = capi.tag.getscreen
 
